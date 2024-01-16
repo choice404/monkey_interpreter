@@ -3,26 +3,23 @@
  * See end of file for extended copyright information
  */
 
-// Include header files
+#pragma once
+
 #include <iostream>
-#include "./header/repl.h"
-#include "./header/lexer.h"
 
-// Preprocessor macro
-#define Log(x) (std::cout << x << std::endl)
-
-int main(int argc, char* argv[])
+class Repl
 {
+public:
+    Repl();
+    ~Repl();
 
-    Log("Starting interpreter");
-    Log("Welcome to the Monkey programming language!");
-    Log("Feel free to type in commands");
-    Repl repl;
-    repl.start();
+    void start();
 
-    // End program
-    return 0;
-}
+private:
+    const char* prompt = ">> ";
+
+    void printPrompt();
+};
 
 /*
  * Copyright (C) 2024 Austin Choi

@@ -6,34 +6,7 @@
 #pragma once
 
 #include <iostream>
-
-/* class TokenType */
-/* { */
-/* public: */
-/*     std::string ILLEGAL = "ILLEGAL"; */
-/*     std::string ENDOFFILE = "EOF"; */
-
-/*     // Identifiers + literals */
-/*     std::string IDENT = "IDENT"; // add, foobar, x, y, ... */
-/*     std::string INT = "INT"; // 123456789 */
-
-/*     // Operators */
-/*     std::string ASSIGN = "="; // = */
-/*     std::string PLUS = "+"; // + */
-                
-/*     // Delimiters */
-/*     std::string COMMA = ","; // , */
-/*     std::string SEMICOLON = ";"; // ; */
-
-/*     std::string LPAREN = "("; // ( */
-/*     std::string RPAREN = ")"; // ) */
-/*     std::string LBRACE = "{"; // { */
-/*     std::string RBRACE = "}"; // } */
-
-/*     // Keywords */
-/*     std::string FUNCTION = "FUNCTION"; // fn */
-/*     std::string LET = "LET"; // let */
-/* }; */
+#include <unordered_map>
 
 enum TokenType
 {
@@ -51,28 +24,28 @@ enum TokenType
     RBRACE,
     FUNCTION,
     LET,
+    MINUS,
+    BANG,
+    ASTERISK,
+    SLASH,
+    LT,
+    GT,
+    TRUE,
+    FALSE,
+    IF,
+    ELSE,
+    RETURN,
+    EQ,
+    NOT_EQ,
 };
 
-const char* TokenTypeString[] = {
-    "ILLEGAL",
-    "EOF",
-    "IDENT",
-    "INT",
-    "ASSIGN",
-    "PLUS",
-    "COMMA",
-    "SEMICOLON",
-    "LPAREN",
-    "RPAREN",
-    "LBRACE",
-    "RBRACE",
-    "FUNCTION",
-    "LET",
-};
+extern const char* TokenTypeString[27];
+
+extern std::unordered_map<TokenType, std::string> TokenMap;
 
 struct Token
 {
-    std::string type;
+    TokenType type;
     std::string literal;
 };
 
@@ -80,9 +53,38 @@ class Lexer
 {
 public:
     Lexer();
+    Lexer(std::string);
     ~Lexer();
     
+    Token getNextToken();
+
+    std::string getInput();
+    char peekChar();
+
+private:
+    std::string input;
+    int position;
+    int readPosition;
+    char ch;
+    std::unordered_map<std::string, TokenType> keywords
+    {
+        {"fn", TokenType::FUNCTION},
+        {"let", TokenType::LET},
+        {"true", TokenType::TRUE},
+        {"false", TokenType::FALSE},
+        {"if", TokenType::IF},
+        {"else", TokenType::ELSE},
+        {"return", TokenType::RETURN},
+    };
+
     Token createToken(TokenType, std::string);
+    void readChar();
+    bool isLetter(char);
+    bool isDigit(char);
+    std::string readIdentifier();
+    std::string readNumber();
+    void skipWhitespace();
+    TokenType lookupIdentifier(std::string);
 };
 
 /*
