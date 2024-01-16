@@ -10,36 +10,6 @@
 // Preprocessor macro
 #define Log(x) (std::cout << x << std::endl)
 
-const char* TokenTypeString[27] = {
-    "ILLEGAL",
-    "",
-    "IDENT",
-    "INT",
-    "ASSIGN",
-    "PLUS",
-    "COMMA",
-    "SEMICOLON",
-    "LPAREN",
-    "RPAREN",
-    "LBRACE",
-    "RBRACE",
-    "FUNCTION",
-    "LET",
-    "MINUS",
-    "BANG",
-    "ASTERISK",
-    "SLASH",
-    "LT",
-    "GT",
-    "TRUE",
-    "FALSE",
-    "IF",
-    "ELSE",
-    "RETURN",
-    "EQ",
-    "NOT_EQ",
-};
-
 std::unordered_map<TokenType, std::string> TokenMap = {
   {TokenType::ILLEGAL, "ILLEGAL"},
   {TokenType::ENDOFFILE, ""},
@@ -99,7 +69,7 @@ Token Lexer::getNextToken()
     switch(this->ch)
     {
         case '=':
-            if(this->peekChar() == '-')
+            if(this->peekChar() == '=')
             {
                 character += this->peekChar();
                 this->readChar();
