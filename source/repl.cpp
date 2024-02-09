@@ -33,6 +33,18 @@ void Repl::start()
             Log("EOF");
             break;
         }
+
+        if(input == "exit()")
+        {
+            Log("Exiting");
+            break;
+        }
+        else if(input == "clear()")
+        {
+            system("clear");
+            continue;
+        }
+
         Lexer lexer(input);
 
         for(Token token = lexer.getNextToken(); token.type != TokenType::ENDOFFILE; token = lexer.getNextToken())

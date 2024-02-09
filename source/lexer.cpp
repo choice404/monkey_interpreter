@@ -4,41 +4,70 @@
  */
 
 // Include header files
-#include <iostream>
 #include "../header/lexer.h"
 
 // Preprocessor macro
 #define Log(x) (std::cout << x << std::endl)
 
-std::unordered_map<TokenType, std::string> TokenMap = {
-  {TokenType::ILLEGAL, "ILLEGAL"},
-  {TokenType::ENDOFFILE, ""},
-  {TokenType::IDENT, "IDENT"},
-  {TokenType::INT, "INT"},
-  {TokenType::ASSIGN, "="},
-  {TokenType::PLUS, "+"},
-  {TokenType::COMMA, ","},
-  {TokenType::SEMICOLON, ";"},
-  {TokenType::LPAREN, "("},
-  {TokenType::RPAREN, ")"},
-  {TokenType::LBRACE, "{"},
-  {TokenType::RBRACE, "}"},
-  {TokenType::FUNCTION, "FUNCTION"},
-  {TokenType::LET, "LET"},
-  {TokenType::MINUS, "-"},
-  {TokenType::BANG, "!"},
-  {TokenType::ASTERISK, "*"},
-  {TokenType::SLASH, "/"},
-  {TokenType::LT, "<"},
-  {TokenType::GT, ">"},
-  {TokenType::TRUE, "TRUE"},
-  {TokenType::FALSE, "FALSE"},
-  {TokenType::IF, "IF"},
-  {TokenType::ELSE, "ELSE"},
-  {TokenType::RETURN, "RETURN"},
-  {TokenType::EQ, "=="},
-  {TokenType::NOT_EQ, "!="},
+const char* TokenMap[27] = {
+  "ILLEGAL",
+  "",
+  "IDENT",
+  "INT",
+  "=",
+  "+",
+  ",",
+  ";",
+  "(",
+  ")",
+  "{",
+  "}",
+  "FUNCTION",
+  "LET",
+  "-",
+  "!",
+  "*",
+  "/",
+  "<",
+  ">",
+  "TRUE",
+  "FALSE",
+  "IF",
+  "ELSE",
+  "RETURN",
+  "==",
+  "!=",
 };
+
+/* std::unordered_map<TokenType, std::string> TokenMap = { */
+/*   {TokenType::ILLEGAL, "ILLEGAL"}, */
+/*   {TokenType::ENDOFFILE, ""}, */
+/*   {TokenType::IDENT, "IDENT"}, */
+/*   {TokenType::INT, "INT"}, */
+/*   {TokenType::ASSIGN, "="}, */
+/*   {TokenType::PLUS, "+"}, */
+/*   {TokenType::COMMA, ","}, */
+/*   {TokenType::SEMICOLON, ";"}, */
+/*   {TokenType::LPAREN, "("}, */
+/*   {TokenType::RPAREN, ")"}, */
+/*   {TokenType::LBRACE, "{"}, */
+/*   {TokenType::RBRACE, "}"}, */
+/*   {TokenType::FUNCTION, "FUNCTION"}, */
+/*   {TokenType::LET, "LET"}, */
+/*   {TokenType::MINUS, "-"}, */
+/*   {TokenType::BANG, "!"}, */
+/*   {TokenType::ASTERISK, "*"}, */
+/*   {TokenType::SLASH, "/"}, */
+/*   {TokenType::LT, "<"}, */
+/*   {TokenType::GT, ">"}, */
+/*   {TokenType::TRUE, "TRUE"}, */
+/*   {TokenType::FALSE, "FALSE"}, */
+/*   {TokenType::IF, "IF"}, */
+/*   {TokenType::ELSE, "ELSE"}, */
+/*   {TokenType::RETURN, "RETURN"}, */
+/*   {TokenType::EQ, "=="}, */
+/*   {TokenType::NOT_EQ, "!="}, */
+/* }; */
 
 Lexer::Lexer()
 {

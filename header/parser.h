@@ -32,6 +32,12 @@ struct Identifier : Expression
   void expressionNode();
 };
 
+struct Program : Node
+{
+  std::vector<Statement> statements;
+  std::string tokenLiteral();
+};
+
 struct LetStatement : Statement
 {
     Token token;
@@ -45,13 +51,17 @@ struct LetStatement : Statement
 class Parser
 {
 public:
-    Parser();
+    Parser(Lexer*);
     ~Parser();
-    std::string TokenLiteral();
 
 private:
-    std::vector<Statement> statements;
+    Lexer* lexer;
+    Token currentToken;
+    Token peekToken;
 
+private:
+    void nextToken();
+    Program* parseProgram();
 };
 
 /*

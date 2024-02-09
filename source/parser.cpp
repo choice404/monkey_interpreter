@@ -10,22 +10,13 @@
 // Preprocessor macro
 #define Log(x) (std::cout << x << std::endl)
 
-// Node class method definitions
-
-// Statement class method definitions
-
-// Expression class method definitions
-
 // Identifier class method definitions
 std::string Identifier::tokenLiteral()
 {
     return token.literal;
 }
 
-void Identifier::expressionNode()
-{
-    Log("Identifier expressionNode function");
-}
+void Identifier::expressionNode() {}
 
 // LetStatement class method definitions
 void LetStatement::statementNode()
@@ -43,27 +34,41 @@ std::string LetStatement::tokenLiteral()
     return token.literal;
 }
 
-// Parser class method definitions
-Parser::Parser()
+// Program class method definitions
+std::string Program::tokenLiteral()
 {
-    Log("Parser created");
-}
-
-Parser::~Parser()
-{
-    Log("Parser destroyed");
-}
-
-std::string Parser::TokenLiteral()
-{
-    if(statements.size() > 0)
+    if (statements.size() > 0)
     {
-        return statements[0].TokenLiteral();
-    } else
+        return statements[0].tokenLiteral();
+    }
+    else
     {
         return "";
     }
 }
+
+// Parser class method definitions
+Parser::Parser(Lexer* lexer)
+{
+    this->nextToken();
+    this->nextToken();
+}
+
+void Parser::nextToken()
+{
+    currentToken = peekToken;
+    peekToken = lexer->getNextToken();
+}
+
+Parser::~Parser() {}
+
+Program* Parser::parseProgram()
+{
+    return nullptr;
+}
+
+
+
 
 /*
  * Copyright (C) 2024 Austin Choi
