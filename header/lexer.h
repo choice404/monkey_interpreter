@@ -41,7 +41,8 @@ enum TokenType
 
 extern const char* TokenTypeString[27];
 
-extern std::unordered_map<TokenType, std::string> TokenMap;
+extern std::string TokenMap[27];
+/* extern std::unordered_map<TokenType, std::string> TokenMap; */
 
 struct Token
 {

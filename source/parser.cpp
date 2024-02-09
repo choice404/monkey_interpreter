@@ -27,6 +27,11 @@ void Identifier::expressionNode()
     Log("Identifier expressionNode function");
 }
 
+std::string Statement::TokenLiteral()
+{
+    return token.literal;
+}
+
 // LetStatement class method definitions
 void LetStatement::statementNode()
 {
