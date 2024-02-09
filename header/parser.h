@@ -12,6 +12,9 @@
 struct Node
 {
     virtual std::string tokenLiteral();
+
+    Token token;
+    std::string value;
 };
 
 struct Statement : Node
@@ -26,31 +29,39 @@ struct Expression : Node
 
 struct Identifier : Expression
 {
-  Token token;
-  std::string value;
-  std::string tokenLiteral();
   void expressionNode();
 };
 
 struct LetStatement : Statement
 {
-    Token token;
-    Identifier* name;
-    Expression value;
     std::string tokenLiteral();
     void statementNode();
     void expressionNode();
+
+    Token token;
+    Identifier* name;
+    Expression value;
+};
+
+struct Program : Node
+{
+    std::string tokenLiteral();
+    std::vector<Statement> statements;
 };
 
 class Parser
 {
 public:
-    Parser();
+    Parser(Lexer);
     ~Parser();
-    std::string TokenLiteral();
-
+    std::string tokenLiteral();
+    void nextToken();
+    Program* parseProgram();
+    
 private:
-    std::vector<Statement> statements;
+    Lexer lexer;
+    Token currentToken;
+    Token peekToken;
 
 };
 

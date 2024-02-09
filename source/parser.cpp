@@ -10,37 +10,28 @@
 // Preprocessor macro
 #define Log(x) (std::cout << x << std::endl)
 
-// Node class method definitions
-
-// Statement class method definitions
-
-// Expression class method definitions
-
-// Identifier class method definitions
-std::string Identifier::tokenLiteral()
+// Node method definitions
+std::string Node::tokenLiteral()
 {
     return token.literal;
 }
 
+// Statement method definitions
+
+// Expression method definitions
+
+// Identifier method definitions
 void Identifier::expressionNode()
 {
-    Log("Identifier expressionNode function");
 }
 
-std::string Statement::TokenLiteral()
-{
-    return token.literal;
-}
-
-// LetStatement class method definitions
+// LetStatement method definitions
 void LetStatement::statementNode()
 {
-    Log("LetStatement statementNode function");
 }
 
 void LetStatement::expressionNode()
 {
-    Log("LetStatement expressionNode function");
 }
 
 std::string LetStatement::tokenLiteral()
@@ -49,9 +40,21 @@ std::string LetStatement::tokenLiteral()
 }
 
 // Parser class method definitions
-Parser::Parser()
+Parser::Parser(Lexer lexer) : lexer(lexer)
 {
-    Log("Parser created");
+    this->nextToken();
+    this->nextToken();
+}
+
+void Parser::nextToken()
+{
+    this->currentToken = this->peekToken;
+    this->peekToken = this->lexer.getNextToken();
+}
+
+Program* Parser::parseProgram()
+{
+    return new Program();
 }
 
 Parser::~Parser()
@@ -59,12 +62,15 @@ Parser::~Parser()
     Log("Parser destroyed");
 }
 
-std::string Parser::TokenLiteral()
+
+// Program method definitions
+std::string Program::tokenLiteral()
 {
     if(statements.size() > 0)
     {
-        return statements[0].TokenLiteral();
-    } else
+        return statements[0].tokenLiteral();
+    }
+    else
     {
         return "";
     }
